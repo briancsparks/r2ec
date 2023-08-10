@@ -60,7 +60,8 @@ struct i2c_response {
 static uint8_t calc_crc8(const uint8_t *data, size_t len)
 {
   uint8_t crc = 0xFF;
-  int i, j;
+  int i = 0;
+  int j = 0;
 
   for (j = 0; j < len; j++) {
     crc ^= data[j];
@@ -74,13 +75,12 @@ static uint8_t calc_crc8(const uint8_t *data, size_t len)
 }
 
 // generate outcoming mesage checksum and write i2c data
-static int stm32_write(struct i2c_client *client, uint8_t ver, uint8_t cmd,
-           uint8_t *data, size_t len)
+static int stm32_write(struct i2c_client *client, uint8_t ver, uint8_t cmd, uint8_t *data, size_t len)
 {
-  struct i2c_request *req;
-  uint8_t tmp[sizeof(struct i2c_request) + len];
-  const int tmp_len = sizeof(tmp);
-  int err;
+  struct i2c_request *req = NULL;
+  const int tmp_len = sizeof(struct i2c_request) + 1;
+  uint8_t tmp[sizeof(struct i2c_request) + 1];
+  int err = 0;
 
   if (!client) {
     printk(KERN_ERR "R2EC I2C client is not ready!\n");
@@ -279,7 +279,7 @@ static int stm32_gpio_write(struct r2ec *gpio, int pin, int val)
 {
   struct i2c_request *req;
   size_t len = 2;
-  uint8_t tmp[sizeof(struct i2c_request) + len];
+  uint8_t tmp[sizeof(struct i2c_request) + 2];
   //int err;
 
   if (!gpio->client) {
@@ -316,7 +316,7 @@ static int stm32_gpio_read(struct r2ec *gpio, int pin, int val)
 {
   struct i2c_request *req;
   size_t len = 2;
-  uint8_t tmp[sizeof(struct i2c_request) + len];
+  uint8_t tmp[sizeof(struct i2c_request) + 2];
   uint8_t recv[1];
   int err;
 
