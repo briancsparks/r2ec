@@ -11,13 +11,13 @@ This repository is intended to be layered on-top of an OpenWrt buildroot. If you
 
 To add it to the buildroot add the following line to feeds.conf.default (or feeds.conf if it exists):
 ```
-src-git rutx11-r2ec https://github.com/briancsparks/r2ec.git
+src-git rutx11r2ec https://github.com/briancsparks/r2ec.git
 ```
 
 To install all its package definitions, run:
 ```
-./scripts/feeds update rutx11-r2ec
-./scripts/feeds install -a -p rutx11-r2ec
+./scripts/feeds update rutx11r2ec
+./scripts/feeds install -a -p rutx11r2ec
 ```
 
 Then run `make menuconfig` and select `kmod-r2ec` under `Kernel modules --> Other modules`
