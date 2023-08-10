@@ -22,14 +22,10 @@ define KernelPackage/r2ec
 	KCONFIG:=
 endef
 
-MAKE_OPTS:= \
-	$(KERNEL_MAKE_FLAGS) \
-	M="$(PKG_BUILD_DIR)"
+MAKE_OPTS:= $(KERNEL_MAKE_FLAGS) M="$(PKG_BUILD_DIR)"
 
 define Build/Compile
-	$(MAKE) -C "$(LINUX_DIR)" \
-		$(MAKE_OPTS) \
-		modules
+	$(MAKE) -C "$(LINUX_DIR)" $(MAKE_OPTS) modules
 endef
 
 $(eval $(call KernelPackage,r2ec))

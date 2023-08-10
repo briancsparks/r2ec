@@ -1,12 +1,22 @@
 #ifndef R2EC_IO_H
 #define R2EC_IO_H
 
-#define PROTO_VERSION 0x02
+#define NO_OF_GPIOS 37
+
+enum proto_version {
+	PROTO_VERSION_1 = 0x01,
+	PROTO_VERSION_2 = 0x02
+};
 
 enum cmd_type_id {
 	CMD_GPIO = 0x06,
-	CMD_BOOT = 0xFE,
-	CMD_FW = 0xFD
+	CMD_PROTO = 0xFC,
+	CMD_FW = 0xFD,
+	CMD_BOOT = 0xFE
+};
+
+enum proto_id {
+	PROTO_GET_SUPPORTED = 0x03
 };
 
 enum boot_id {
@@ -21,7 +31,8 @@ enum state_id {
 	WATCHDOG_RESET = 0x1B,
 	APPLICATION_START_FAIL = 0x99,
 	HARD_FAULT_ERROR = 0x9A,
-	APP_STARTED = 0xFC
+	APP_STARTED = 0xFC,
+	NO_DATA_AVAILABLE = 0xFF
 };
 
 enum ack_id {
