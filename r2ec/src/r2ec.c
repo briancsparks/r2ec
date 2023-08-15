@@ -577,6 +577,9 @@ static struct kobject *g_r2ec_kobj;
 static int r2ec_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
   struct r2ec_platform_data *pdata = dev_get_platdata(&client->dev);
+  dev_err(&client->dev,
+    "r2ec_probe: dev_get_platdata(0x%x, %s): 0x%x\n",
+    client->addr, client->name, pdata);
   struct r2ec *gpio;
   int status, i;
 
